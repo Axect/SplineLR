@@ -9,15 +9,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let init_lr   = 1e-2;
     let min_lr    = 1e-4;
 
-    let splr = SplineLR { init_lr: init_lr.ln(), min_lr: min_lr.ln(), N: max_epoch };
+    //let splr = SplineLR { init_lr: init_lr.ln(), min_lr: min_lr.ln(), N: max_epoch };
+    let splr = SplineLR { init_lr, min_lr, N: max_epoch };
     let domain = linspace(0, max_epoch, 200);
     for i in 1 ..= 3 {
         let (cs_plus, cs_minus) = splr.gen_splines(i)?;
         let y_plus = cs_plus.eval_vec(&domain);
         let y_minus = cs_minus.eval_vec(&domain);
 
-        let y_plus = y_plus.fmap(|x| x.exp());
-        let y_minus = y_minus.fmap(|x| x.exp());
+        //let y_plus = y_plus.fmap(|x| x.exp());
+        //let y_minus = y_minus.fmap(|x| x.exp());
 
         let mut plt = Plot2D::new();
         plt
@@ -26,7 +27,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .insert_image(y_minus)
             .set_xlabel("Epoch")
             .set_ylabel("Learning Rate")
-            .set_yscale(PlotScale::Log)
             .set_style(PlotStyle::Nature)
             .set_dpi(600)
             .tight_layout()
@@ -47,7 +47,7 @@ pub struct SplineLR {
 impl SplineLR {
     fn delta_pt(&self) -> (f64, f64) {
         let theta = self.N.atan2(self.init_lr - self.min_lr);
-        let alpha = theta.min(PI / 2.0 - theta) * 2.0;
+        let alpha = theta.min(PI / 2.0 - theta) * 2000.0;
         let l = ((self.init_lr - self.min_lr).powi(2) + self.N.powi(2)).sqrt() / 4f64;
     
         (l * alpha.tan() * theta.sin(), l * alpha.tan() * theta.cos())
