@@ -5,9 +5,9 @@ use peroxide::fuga::*;
 type PTS = (Vec<f64>, Vec<f64>);
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let max_epoch = 100.0;
-    let init_lr   = 1f64;
-    let min_lr    = 1e-3;
+    let max_epoch = 200.0;
+    let init_lr   = 1e-2;
+    let min_lr    = 1e-4;
 
     let splr = SplineLR { init_lr: init_lr.ln(), min_lr: min_lr.ln(), N: max_epoch };
     let domain = linspace(0, max_epoch, 200);
