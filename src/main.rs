@@ -47,7 +47,7 @@ pub struct SplineLR {
 impl SplineLR {
     fn delta_pt(&self) -> (f64, f64) {
         let theta = self.N.atan2(self.init_lr - self.min_lr);
-        let alpha = theta.min(PI / 2.0 - theta) * 0.99;
+        let alpha = theta.min(PI / 2.0 - theta) * 2.0;
         let l = ((self.init_lr - self.min_lr).powi(2) + self.N.powi(2)).sqrt() / 4f64;
     
         (l * alpha.tan() * theta.sin(), l * alpha.tan() * theta.cos())
