@@ -14,10 +14,9 @@ The main components of this project are:
 
 ## Dependencies
 
-This project uses the following Rust crates:
+This project uses the following dependencies:
 
-- `std`: For basic operations and constants.
-- `peroxide`: For mathematical operations and plotting.
+- `peroxide`: For mathematical operations and plotting. (for plot feature, we need two python libraries: matplotlib & scienceplots)
 
 ## Key Features
 
