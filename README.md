@@ -1,6 +1,6 @@
 # Cubic Hermite Spline-based Learning Rate Scheduler
 
-This project implements a concept for a Learning Rate Scheduler using Cubic Hermite Splines.
+This project implements a concept for a Learning Rate Scheduler using Cubic Hermite Splines to test learning rate decoupling problem.
 The scheduler provides a smooth transition between initial and final learning rates over the course of training epochs.
 
 ## Overview
